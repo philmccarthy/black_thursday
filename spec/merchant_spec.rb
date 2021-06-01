@@ -13,7 +13,7 @@ RSpec.describe Merchant do
       merchant = Merchant.new(row_data)
 
       expect(merchant).to be_an_instance_of Merchant
-      expect(merchant.id).to eq(row_data[:id])
+      expect(merchant.id).to eq(row_data[:id].to_i)
       expect(merchant.name).to eq(row_data[:name])
     end
   end
