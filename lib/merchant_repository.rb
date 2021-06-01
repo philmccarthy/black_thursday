@@ -25,4 +25,3 @@ class MerchantRepository
     merchant.name = attributes[:name]
   end
 end
-
