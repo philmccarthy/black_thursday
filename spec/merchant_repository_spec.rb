@@ -122,12 +122,12 @@ RSpec.describe MerchantRepository do
       end
 
       it 'does not delete anything when merchant_id doesnt exist' do
-        merchant_count = @mr.all.size
+        starting_merchant_count = @mr.all.size
         
         extinct_id = 4104
         @mr.delete(extinct_id)
 
-        expect(@mr.all.size).to eq(merchant_count)
+        expect(@mr.all.size).to eq(starting_merchant_count)
       end
     end
   end
