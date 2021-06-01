@@ -6,4 +6,8 @@ module Repositable
   def find_by_name(name)
     all.find { |object| object.name.downcase == name.downcase}
   end
+
+  def delete(id)
+    all.delete(find_by_id(id))
+  end
 end

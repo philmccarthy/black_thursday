@@ -111,5 +111,24 @@ RSpec.describe MerchantRepository do
         expect(@mr.all.first.id).to_not eq(0000)
       end
     end
+
+    context '#delete' do
+      it 'deletes a merchant from the repository' do
+        delete_merchant = @mr.all.last
+        
+        @mr.delete(delete_merchant.id)
+
+        expect(@mr.all.last.id).to_not eq(delete_merchant.id)
+      end
+
+      it 'does not delete anything when merchant_id doesnt exist' do
+        merchant_count = @mr.all.size
+        
+        extinct_id = 4104
+        @mr.delete(extinct_id)
+
+        expect(@mr.all.size).to eq(merchant_count)
+      end
+    end
   end
 end
