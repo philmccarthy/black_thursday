@@ -3,14 +3,14 @@ require 'csv'
 require './lib/item_repository'
 
 RSpec.describe ItemRepository do
+  before(:each) do
+    @items_data = CSV.read('./spec/fixtures/items_fixture.csv', headers: true, header_converters: :symbol)
+    @ir = ItemRepository.new(@items_data)
+  end
+  
   describe 'instance methods' do
-    before(:each) do
-      @items_data = CSV.read('./spec/fixtures/items_fixture.csv', headers: true, header_converters: :symbol)
-      @ir = ItemRepository.new(@items_data)
-    end
 
     it 'initializes with with all Items loaded' do
-      
       expect(@ir).to be_an ItemRepository
       expect(@ir.all).to be_an Array
       expect(@ir.all.first).to be_an Item
