@@ -11,6 +11,10 @@ class MerchantRepository
     @all = data.map { |merchant_data| Merchant.new(merchant_data) }
   end
 
+  def find_all_by_name(name)
+    all.select { |merchant| merchant.name.downcase.include?(name.downcase)}
+  end
+
   def inspect
     "#<#{self.class} #{@merchants.size} rows>"
   end
