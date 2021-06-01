@@ -9,10 +9,10 @@ RSpec.describe MerchantRepository do
       mr = MerchantRepository.new(merchants_data)
 
       expect(mr).to be_an_instance_of MerchantRepository
-      expect(mr.merchants).to be_an Array
-      expect(mr.merchants.first).to be_an_instance_of Merchant
-      expect(mr.merchants.last).to be_an_instance_of Merchant
-      expect(mr.merchants.size).to eq(9)
+      expect(mr.all).to be_an Array
+      expect(mr.all.first).to be_an_instance_of Merchant
+      expect(mr.all.last).to be_an_instance_of Merchant
+      expect(mr.all.size).to eq(9)
     end
   end
 end

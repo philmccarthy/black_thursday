@@ -2,9 +2,9 @@ require_relative 'merchant'
 
 class MerchantRepository
 
-  attr_reader :merchants
+  attr_reader :all
 
   def initialize(data)
-    @merchants = data.map { |merchant_data| Merchant.new(merchant_data) }
+    @all = data.map { |merchant_data| Merchant.new(merchant_data) }
   end
 end
