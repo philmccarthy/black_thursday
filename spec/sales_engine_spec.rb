@@ -5,7 +5,10 @@ RSpec.describe SalesEngine do
   describe 'class methods' do
     context '::from_csv' do
       it 'initializes a SalesEngine object from CSV data' do
-        files = {merchants: './data/merchants.csv'}
+        files = {
+          merchants: './data/merchants.csv',
+          items: './data/items.csv'
+        }
 
         se = SalesEngine.from_csv(files)
 
