@@ -78,5 +78,18 @@ RSpec.describe MerchantRepository do
         expect(no_merchants_match).to eq([])
       end
     end
+
+    context '#create' do
+      it 'creates a new merchant and adds it to the repository' do
+        attributes = { name: 'New Merchant' }
+        last_id = @mr.all.last.id
+
+        @mr.create(attributes)
+
+        expect(@mr.all.last).to be_a Merchant
+        expect(@mr.all.last.name).to eq(attributes[:name])
+        expect(@mr.all.last.id).to eq(last_id + 1)
+      end
+    end
   end
 end
