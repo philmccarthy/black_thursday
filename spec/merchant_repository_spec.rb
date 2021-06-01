@@ -11,6 +11,7 @@ RSpec.describe MerchantRepository do
       expect(mr).to be_an_instance_of MerchantRepository
       expect(mr.merchants).to be_an Array
       expect(mr.merchants.first).to be_an_instance_of Merchant
+      expect(mr.merchants.last).to be_an_instance_of Merchant
       expect(mr.merchants.size).to eq(9)
     end
   end
