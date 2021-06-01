@@ -5,7 +5,7 @@ require_relative 'item_repository'
 class SalesEngine
  
   def self.from_csv(files)
-    items_data = CSV.read('./data/items.csv', headers: true, header_converters: :symbol)
+    items_data = CSV.read(files[:items], headers: true, header_converters: :symbol)
     merchants_data = CSV.read(files[:merchants], headers: true, header_converters: :symbol)
     new({
       items: items_data,
