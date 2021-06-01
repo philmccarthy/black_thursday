@@ -1,6 +1,9 @@
 require_relative 'item'
+require_relative 'repositable'
 
 class ItemRepository
+  include Repositable
+  
   attr_reader :all
 
   def initialize(data)

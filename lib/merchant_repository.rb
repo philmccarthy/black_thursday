@@ -1,6 +1,10 @@
 require_relative 'merchant'
+require_relative 'repositable'
+
 
 class MerchantRepository
+  include Repositable
+  
   attr_reader :all
 
   def initialize(data)
