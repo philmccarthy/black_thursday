@@ -5,4 +5,8 @@ class Merchant
     @id = data[:id].to_i
     @name = data[:name]
   end
+
+  def name=(name)
+    @name = name
+  end
 end

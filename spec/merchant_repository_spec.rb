@@ -91,5 +91,25 @@ RSpec.describe MerchantRepository do
         expect(@mr.all.last.id).to eq(last_id + 1)
       end
     end
+
+    context '#update' do
+      it 'updates an existing merchant name' do
+        merchant_id = @mr.all.first.id
+        old_merchant_name = @mr.all.first.name
+
+        attributes = { name: 'Updated Merchant' }
+        @mr.update(merchant_id, attributes)
+
+        expect(@mr.all.first.name).to_not eq(old_merchant_name)
+        expect(@mr.all.first.name).to eq('Updated Merchant')
+      end
+
+      it 'cannot change a merchant_id' do
+        attributes = { id: 0000 }
+        @mr.update(@mr.all.first.id, attributes)
+
+        expect(@mr.all.first.id).to_not eq(0000)
+      end
+    end
   end
 end

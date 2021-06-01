@@ -19,4 +19,10 @@ class MerchantRepository
     attributes[:id] = @all.last.id + 1
     @all << Merchant.new(attributes)
   end
+
+  def update(id, attributes)
+    merchant = find_by_id(id)
+    merchant.name = attributes[:name]
+  end
 end
+
