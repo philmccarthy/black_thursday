@@ -23,5 +23,12 @@ RSpec.describe ItemRepository do
       expect(item).to be_an Item
       expect(item.id).to eq(@items_data[0][:id].to_i)
     end
+
+    it '#find_by_name' do
+      item = @ir.find_by_name('Glitter scrabble frames')
+
+      expect(item).to be_an Item
+      expect(item.name).to eq('Glitter scrabble frames')
+    end
   end
 end

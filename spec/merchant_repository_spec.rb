@@ -23,5 +23,12 @@ RSpec.describe MerchantRepository do
       expect(merchant.id).to eq(@merchants_data[3][:id].to_i)
       expect(merchant.name).to eq(@merchants_data[3][:name])
     end
+
+    it '#find_by_name' do
+      merchant = @mr.find_by_name('LolaMarleys')
+
+      expect(merchant).to be_an Merchant
+      expect(merchant.name).to eq('LolaMarleys')
+    end
   end
 end
