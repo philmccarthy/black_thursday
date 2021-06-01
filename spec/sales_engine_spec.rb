@@ -9,9 +9,15 @@ RSpec.describe SalesEngine do
 
         se = SalesEngine.from_csv(files)
 
+        expect(se).to be_an_instance_of SalesEngine
+
         expect(se.merchants).to be_an_instance_of MerchantRepository
         expect(se.merchants.all).to be_an Array
         expect(se.merchants.all.first).to be_an_instance_of Merchant
+
+        expect(se.items).to be_an_instance_of ItemRepository
+        expect(se.items.all).to be_an Array
+        expect(se.items.all.first).to be_an_instance_of Item
       end
     end
   end
