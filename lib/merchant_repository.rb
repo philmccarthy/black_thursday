@@ -22,6 +22,7 @@ class MerchantRepository
 
   def update(id, attributes)
     merchant = find_by_id(id)
+    return nil if merchant.nil?
     merchant.name = attributes[:name]
   end
 end
