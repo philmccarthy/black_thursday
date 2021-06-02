@@ -12,6 +12,6 @@ module Repositable
   end
 
   def inspect
-    "#<#{self.class} #{@items.size} rows>"
+    "#<#{self.class} #{all.size} rows>"
   end
 end
