@@ -58,7 +58,7 @@ RSpec.describe ItemRepository do
 
     context '#find_all_by_price' do
       it 'returns all items with an exact price match' do
-        price = 1300
+        price = 13
         items = @ir.find_all_by_price(price)
         
         expect(items).to be_an Array
@@ -78,7 +78,7 @@ RSpec.describe ItemRepository do
 
     context '#find_all_by_price' do
       it 'returns all items that match given price range' do
-        range = (1000..1500)
+        range = (10..15)
         items = @ir.find_all_by_price_in_range(range)
         
         expect(items).to be_an Array
@@ -136,7 +136,7 @@ RSpec.describe ItemRepository do
         expect(new_item.id).to eq(old_item.id + 1)
         expect(new_item.name).to eq(attributes[:name])
         expect(new_item.description).to eq(attributes[:description])
-        expect(new_item.unit_price).to eq(attributes[:unit_price])
+        expect(new_item.unit_price).to eq(attributes[:unit_price].to_d / 100)
         expect(new_item.created_at).to eq(Time.new(attributes[:created_at]))
         expect(new_item.updated_at).to eq(Time.new(attributes[:updated_at]))
         expect(new_item.merchant_id).to eq(attributes[:merchant_id])
@@ -150,7 +150,7 @@ RSpec.describe ItemRepository do
         before_name = item.name
         before_desc = item.description
         before_price = item.unit_price
-        
+
         attributes = {
           :name        => "New Stuff",
           :description => "It is extra fresh",
@@ -162,6 +162,45 @@ RSpec.describe ItemRepository do
         expect(item.name).to_not eq(before_name)
         expect(item.description).to_not eq(before_desc)
         expect(item.unit_price).to_not eq(before_price)
+        expect(item.updated_at.round(0)).to eq(Time.now.utc.round(0))
+      end
+
+      it 'only updates name, desc, price and updated_at' do
+        id = 263395617
+        item = @ir.find_by_id(id)
+        before_id = item.id
+        before_merchant_id = item.merchant_id
+        before_created_at = item.created_at
+
+        attributes = {
+          :id          => 1,
+          :merchant_id => 10000000,
+          :created_at  => Time.now.to_s,
+        }
+
+        expect(item.id).to eq(before_id)
+        expect(item.merchant_id).to eq(before_merchant_id)
+        expect(item.created_at).to eq(before_created_at)
+      end
+    end
+
+    context '#delete' do
+      it 'deletes an instance of item from the repository' do
+        before_count = @ir.all.size
+        item_id = 263395617
+        
+        @ir.delete(item_id)
+        
+        after_count = @ir.all.size
+
+        expect(after_count).to_not eq(before_count)
+        expect(@ir.find_by_id(item_id)).to be_nil
+      end
+    end
+
+    context '#inspect' do
+      it 'inherits overriden inspect method from Repositable' do
+        expect(@ir.inspect).to eq("#<ItemRepository 7 rows>")
       end
     end
   end

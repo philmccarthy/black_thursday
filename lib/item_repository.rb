@@ -33,6 +33,7 @@ class ItemRepository
 
   def update(id, attributes)
     item = find_by_id(id)
+    return nil if item.nil?
     item.name = attributes[:name] if attributes[:name]
     item.description = attributes[:description]  if attributes[:description]
     item.unit_price = attributes[:unit_price] if attributes[:unit_price]
