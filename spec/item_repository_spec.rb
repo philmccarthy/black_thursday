@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'csv'
+require 'bigdecimal'
 require './lib/item_repository'
 
 RSpec.describe ItemRepository do
@@ -9,7 +10,7 @@ RSpec.describe ItemRepository do
   end
   
   describe 'instance methods' do
-    context '::new' do
+    context '#new' do
       it 'initializes an ItemRepo with all Items loaded' do
         expect(@ir).to be_an ItemRepository
         expect(@ir.all).to be_an Array
@@ -55,7 +56,7 @@ RSpec.describe ItemRepository do
       end
     end
 
-    context '::find_all_by_price' do
+    context '#find_all_by_price' do
       it 'returns all items with an exact price match' do
         price = 1300
         items = @ir.find_all_by_price(price)
@@ -75,7 +76,7 @@ RSpec.describe ItemRepository do
       end
     end
 
-    context '::find_all_by_price' do
+    context '#find_all_by_price' do
       it 'returns all items that match given price range' do
         range = (1000..1500)
         items = @ir.find_all_by_price_in_range(range)
@@ -95,7 +96,7 @@ RSpec.describe ItemRepository do
       end
     end
 
-    context '::find_all_by_merchant_id' do
+    context '#find_all_by_merchant_id' do
       it 'returns an array of items belonging to given merchant' do
         merchant_id = 12334185
         items = @ir.find_all_by_merchant_id(merchant_id)
@@ -111,6 +112,34 @@ RSpec.describe ItemRepository do
         items = @ir.find_all_by_merchant_id(extinct_merchant_id)
 
         expect(items).to be_empty
+      end
+    end
+
+    context '#create' do
+      it 'creates an item from attributes' do
+        attributes = {
+          :name        => "Pencil",
+          :description => "You can use it to write things",
+          :unit_price  => BigDecimal(10.99,4),
+          :created_at  => Time.now.to_s,
+          :updated_at  => Time.now.to_s,
+          :merchant_id => 2
+        }
+        
+        old_item = @ir.all.last
+
+        @ir.create(attributes)
+        new_item = @ir.all.last
+
+        expect(new_item).to_not eq(old_item)
+
+        expect(new_item.id).to eq(old_item.id + 1)
+        expect(new_item.name).to eq(attributes[:name])
+        expect(new_item.description).to eq(attributes[:description])
+        expect(new_item.unit_price).to eq(attributes[:unit_price])
+        expect(new_item.created_at).to eq(DateTime.parse(attributes[:created_at]))
+        expect(new_item.updated_at).to eq(DateTime.parse(attributes[:updated_at]))
+        expect(new_item.merchant_id).to eq(attributes[:merchant_id])
       end
     end
   end
