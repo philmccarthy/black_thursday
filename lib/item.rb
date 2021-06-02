@@ -13,9 +13,9 @@ class Item
     @id = data[:id].to_i
     @name = data[:name]
     @description = data[:description]
-    @unit_price = data[:unit_price].to_d
-    @created_at = Time.new(data[:created_at])
-    @updated_at = Time.new(data[:updated_at])
+    @unit_price = BigDecimal(data[:unit_price].to_d / 100)
+    @created_at = data[:created_at].is_a?(Time) ? data[:created_at] : Time.new(data[:created_at])
+    @updated_at = data[:updated_at].is_a?(Time) ? data[:updated_at] : Time.new(data[:updated_at])
     @merchant_id = data[:merchant_id].to_i
   end
 
@@ -33,5 +33,9 @@ class Item
 
   def updated_at=(time)
     @updated_at = time
+  end
+
+  def unit_price_to_dollars
+    unit_price.to_f
   end
 end

@@ -7,7 +7,6 @@ RSpec.describe Item do
   describe 'initialize' do
     it 'exists and has attributes' do
       item_data = CSV.read('./spec/fixtures/items_fixture.csv', headers: true, header_converters: :symbol).first
-      
       item = Item.new(item_data)
 
       expect(item).to be_an_instance_of Item
@@ -21,7 +20,7 @@ RSpec.describe Item do
       expect(item.description).to eq(item_data[:description])
       expect(item.description).to be_a String
       
-      expect(item.unit_price).to eq(item_data[:unit_price].to_d)
+      expect(item.unit_price).to eq(item_data[:unit_price].to_d / 100)
       expect(item.unit_price).to be_a BigDecimal
 
       
@@ -33,6 +32,15 @@ RSpec.describe Item do
 
       expect(item.merchant_id).to eq(item_data[:merchant_id].to_i)
       expect(item.merchant_id).to be_an Integer
+    end
+  end
+
+  describe '#unit_price_to_dollars' do
+    it 'returns unit price as a float' do
+      item_data = CSV.read('./spec/fixtures/items_fixture.csv', headers: true, header_converters: :symbol).first
+      item = Item.new(item_data)
+
+      expect(item.unit_price_to_dollars).to eq(item.unit_price.to_f)
     end
   end
 end
