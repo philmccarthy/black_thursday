@@ -12,7 +12,7 @@ class MerchantRepository
   end
 
   def find_all_by_name(name)
-    all.select { |merchant| merchant.name.downcase.include?(name.downcase)}
+    all.select { |merchant| merchant.name.downcase.include? name.downcase }
   end
 
   def create(attributes)

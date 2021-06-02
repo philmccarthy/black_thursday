@@ -10,7 +10,7 @@ class ItemRepository
     @all = data.map { |item_data| Item.new(item_data) }  
   end
 
-  def inspect
-    "#<#{self.class} #{@items.size} rows>"
+  def find_all_with_description(description)
+    all.select { |item| item.description.downcase.include? description.downcase }
   end
 end
