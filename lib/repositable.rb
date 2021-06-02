@@ -11,6 +11,10 @@ module Repositable
     all.delete(find_by_id(id))
   end
 
+  def count
+    all.size
+  end
+
   def inspect
     "#<#{self.class} #{all.size} rows>"
   end

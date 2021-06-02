@@ -6,8 +6,8 @@ RSpec.describe SalesEngine do
     context '::from_csv' do
       it 'initializes a SalesEngine object from CSV data' do
         files = {
-          merchants: './data/merchants.csv',
-          items: './data/items.csv'
+          merchants: './spec/fixtures/merchants_fixture.csv',
+          items: './spec/fixtures/items_fixture.csv'
         }
 
         se = SalesEngine.from_csv(files)
@@ -21,6 +21,8 @@ RSpec.describe SalesEngine do
         expect(se.items).to be_an_instance_of ItemRepository
         expect(se.items.all).to be_an Array
         expect(se.items.all.first).to be_an_instance_of Item
+
+        expect(se.analyst).to be_an_instance_of SalesAnalyst
       end
     end
   end
