@@ -94,5 +94,24 @@ RSpec.describe ItemRepository do
         expect(items).to be_empty
       end
     end
+
+    context '::find_all_by_merchant_id' do
+      it 'returns an array of items belonging to given merchant' do
+        merchant_id = 12334185
+        items = @ir.find_all_by_merchant_id(merchant_id)
+
+        expect(items).to be_an Array
+        expect(items.size).to eq(3)
+        expect(items.first).to be_an Item
+        expect(items.first.merchant_id).to eq(merchant_id)
+      end
+
+      it 'returns an empty array when no items belong to given merchant_id' do
+        extinct_merchant_id = -10
+        items = @ir.find_all_by_merchant_id(extinct_merchant_id)
+
+        expect(items).to be_empty
+      end
+    end
   end
 end
