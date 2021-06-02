@@ -39,12 +39,59 @@ RSpec.describe ItemRepository do
     context '#find_all_with_description' do
       it 'returns an array of all matching items with given description' do
         description = 'any'
-        
         items = @ir.find_all_with_description(description)
 
         expect(items).to be_an Array
         expect(items.size).to eq(5)
         expect(items.first).to be_a Item
+      end
+
+      it 'returns an empty array when no matches exist' do
+        description = 'askjdsakjf'
+        items = @ir.find_all_with_description(description)
+
+        expect(items).to be_an Array
+        expect(items).to be_empty
+      end
+    end
+
+    context '::find_all_by_price' do
+      it 'returns all items with an exact price match' do
+        price = 1300
+        items = @ir.find_all_by_price(price)
+        
+        expect(items).to be_an Array
+        expect(items.size).to eq(1)
+        
+        expect(items.first).to be_an Item
+        expect(items.first.unit_price).to eq(price)
+      end
+      
+      it 'returns empty array if no price match' do
+        price = 123456
+        items = @ir.find_all_by_price(price)
+
+        expect(items).to be_empty
+      end
+    end
+
+    context '::find_all_by_price' do
+      it 'returns all items that match given price range' do
+        range = (1000..1500)
+        items = @ir.find_all_by_price_in_range(range)
+        
+        expect(items).to be_an Array
+        expect(items.size).to eq(3)
+        
+        expect(items.first).to be_an Item
+        expect(items.first.unit_price).to be_between(range.first, range.last)
+      end
+      
+      it 'returns empty array if no price match' do
+        range = (0..1)
+        items = @ir.find_all_by_price_in_range(range)
+
+        expect(items).to be_empty
       end
     end
   end
