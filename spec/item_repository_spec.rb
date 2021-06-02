@@ -146,15 +146,16 @@ RSpec.describe ItemRepository do
     context '#update' do
       it 'updates an items attributes' do
         id = 263395617
+        item = @ir.find_by_id(id)
+        before_name = item.name
+        before_desc = item.description
+        before_price = item.unit_price
+        
         attributes = {
           :name        => "New Stuff",
           :description => "It is extra fresh",
           :unit_price  => 100.50,
         }
-        item = @ir.find_by_id(id)
-        before_name = item.name
-        before_desc = item.description
-        before_price = item.unit_price
 
         @ir.update(id, attributes)
 
