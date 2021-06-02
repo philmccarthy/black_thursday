@@ -25,11 +25,11 @@ RSpec.describe Item do
       expect(item.unit_price).to be_a BigDecimal
 
       
-      expect(item.created_at).to eq(DateTime.parse(item_data[:created_at]))
-      expect(item.created_at).to be_a DateTime
+      expect(item.created_at).to eq(Time.new(item_data[:created_at]))
+      expect(item.created_at).to be_a Time
       
-      expect(item.updated_at).to eq(DateTime.parse(item_data[:updated_at]))
-      expect(item.updated_at).to be_a DateTime
+      expect(item.updated_at).to eq(Time.new(item_data[:updated_at]))
+      expect(item.updated_at).to be_a Time
 
       expect(item.merchant_id).to eq(item_data[:merchant_id].to_i)
       expect(item.merchant_id).to be_an Integer

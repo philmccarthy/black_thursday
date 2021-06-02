@@ -30,4 +30,12 @@ class ItemRepository
     attributes[:id] = all.last.id + 1
     @all << Item.new(attributes)
   end
+
+  def update(id, attributes)
+    item = find_by_id(id)
+    item.name = attributes[:name] if attributes[:name]
+    item.description = attributes[:description]  if attributes[:description]
+    item.unit_price = attributes[:unit_price] if attributes[:unit_price]
+    item.updated_at = Time.now.utc
+  end
 end

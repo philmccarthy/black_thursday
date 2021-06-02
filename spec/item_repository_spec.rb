@@ -137,9 +137,30 @@ RSpec.describe ItemRepository do
         expect(new_item.name).to eq(attributes[:name])
         expect(new_item.description).to eq(attributes[:description])
         expect(new_item.unit_price).to eq(attributes[:unit_price])
-        expect(new_item.created_at).to eq(DateTime.parse(attributes[:created_at]))
-        expect(new_item.updated_at).to eq(DateTime.parse(attributes[:updated_at]))
+        expect(new_item.created_at).to eq(Time.new(attributes[:created_at]))
+        expect(new_item.updated_at).to eq(Time.new(attributes[:updated_at]))
         expect(new_item.merchant_id).to eq(attributes[:merchant_id])
+      end
+    end
+
+    context '#update' do
+      it 'updates an items attributes' do
+        id = 263395617
+        attributes = {
+          :name        => "New Stuff",
+          :description => "It is extra fresh",
+          :unit_price  => 100.50,
+        }
+        item = @ir.find_by_id(id)
+        before_name = item.name
+        before_desc = item.description
+        before_price = item.unit_price
+
+        @ir.update(id, attributes)
+
+        expect(item.name).to_not eq(before_name)
+        expect(item.description).to_not eq(before_desc)
+        expect(item.unit_price).to_not eq(before_price)
       end
     end
   end
