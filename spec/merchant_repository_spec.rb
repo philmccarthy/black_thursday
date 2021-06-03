@@ -13,7 +13,7 @@ RSpec.describe MerchantRepository do
       expect(@mr.all).to be_an Array
       expect(@mr.all.first).to be_an_instance_of Merchant
       expect(@mr.all.last).to be_an_instance_of Merchant
-      expect(@mr.all.size).to eq(9)
+      expect(@mr.all.size).to eq(10)
     end
 
     context '#find_by_id' do
