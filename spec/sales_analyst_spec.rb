@@ -28,5 +28,14 @@ RSpec.describe SalesAnalyst do
         expect(avg_items_per_merchant).to eq(0.78)
       end
     end
+
+    context '#average_items_per_merchant_standard_deviation' do
+      it 'returns a Float standard deviation' do
+        actual = @analyst.average_items_per_merchant_standard_deviation
+
+        expect(actual).to be_a Float
+        expect(actual).to eq(1.47)
+      end
+    end
   end
 end
