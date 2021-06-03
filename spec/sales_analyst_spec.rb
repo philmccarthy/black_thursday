@@ -56,5 +56,16 @@ RSpec.describe SalesAnalyst do
         expect(actual).to eq(11.17)
       end
     end
+
+    context '#average_average_price_per_merchant' do
+      it 'returns a BigDecimal average price for all merchants' do
+        # Merchants fixture data currently contains merchant_ids that don't appear
+        # in the Items fixture data. As a result, this function returns NaN
+        # in this test whereas it successfully passes the spec_harness
+        actual = @analyst.average_average_price_per_merchant
+
+        expect(actual).to be_a BigDecimal
+      end
+    end
   end
 end

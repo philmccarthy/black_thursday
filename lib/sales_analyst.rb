@@ -38,6 +38,14 @@ class SalesAnalyst
     (items.sum { |item| item.unit_price } / BigDecimal(items.size)).round(2)
   end
 
+  def average_average_price_per_merchant
+    avg_sum = engine.merchants.all.inject(0) do |total, merchant|
+      avg = average_item_price_for_merchant(merchant.id)
+      total += avg if avg.respond_to?(:+)
+    end
+    (avg_sum / BigDecimal(engine.merchants.count)).round(2)
+  end
+
   def diff_squared(nums, avg)
     nums.map { |num| (num - avg) ** 2 }
   end
