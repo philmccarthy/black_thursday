@@ -47,5 +47,14 @@ RSpec.describe SalesAnalyst do
         expect(actual.first).to be_a Merchant
       end
     end
+
+    context '#average_item_price_for_merchant' do
+      it 'returns a BicDecimal average price for given merchant' do
+        actual = @analyst.average_item_price_for_merchant(12334185)
+
+        expect(actual).to be_a BigDecimal
+        expect(actual).to eq(11.17)
+      end
+    end
   end
 end
