@@ -67,5 +67,15 @@ RSpec.describe SalesAnalyst do
         expect(actual).to be_a BigDecimal
       end
     end
+
+    context '#golden items' do
+      it 'returns an array of item objects priced 2 standard devs above avg' do
+        actual = @analyst.golden_items
+
+        expect(actual).to be_an Array
+        expect(actual.first).to be_an Item
+        expect(actual.size).to eq(1)
+      end
+    end
   end
 end

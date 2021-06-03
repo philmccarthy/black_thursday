@@ -41,9 +41,28 @@ class SalesAnalyst
   def average_average_price_per_merchant
     avg_sum = engine.merchants.all.inject(0) do |total, merchant|
       avg = average_item_price_for_merchant(merchant.id)
-      total += avg if avg.respond_to?(:+)
+      total += avg
     end
     (avg_sum / BigDecimal(engine.merchants.count)).round(2)
+  end
+
+  def golden_items
+    engine.items.all.select do |item|
+      item.unit_price > (average_item_price_standard_deviation * 2)
+    end
+  end
+
+  def average_item_price
+    (engine.items.all.sum { |item| item.unit_price } / BigDecimal(engine.items.count)).round(2)
+  end
+
+  def average_item_price_standard_deviation
+    @avg_item_price_std_dev ||= begin
+      variance = diff_squared(engine.items.all.map { |item| item.unit_price }, average_item_price)
+      sum = variance.sum
+      divided_sum = sum / (engine.items.count - 1)
+      @avg_item_price_std_dev = Math.sqrt(divided_sum).round(2)
+    end
   end
 
   def diff_squared(nums, avg)
