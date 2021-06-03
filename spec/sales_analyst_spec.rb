@@ -25,7 +25,7 @@ RSpec.describe SalesAnalyst do
         avg_items_per_merchant = @analyst.average_items_per_merchant
 
         expect(avg_items_per_merchant).to be_a Float
-        expect(avg_items_per_merchant).to eq(0.78)
+        expect(avg_items_per_merchant).to eq(0.70)
       end
     end
 
@@ -34,7 +34,17 @@ RSpec.describe SalesAnalyst do
         actual = @analyst.average_items_per_merchant_standard_deviation
 
         expect(actual).to be_a Float
-        expect(actual).to eq(1.47)
+        expect(actual).to eq(1.54)
+      end
+    end
+
+    context '#merchants_with_high_item_count' do
+      it 'returns an array of merchants one std dev above avg' do
+        actual = @analyst.merchants_with_high_item_count
+
+        expect(actual).to be_an Array
+        expect(actual.size).to eq(1)
+        expect(actual.first).to be_a Merchant
       end
     end
   end
