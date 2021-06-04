@@ -17,7 +17,7 @@ class MerchantRepository
 
   def create(attributes)
     attributes[:id] = all.last.id + 1
-    @all << Merchant.new(attributes)
+    @all << Merchant.new(attributes, self)
   end
 
   def update(id, attributes)

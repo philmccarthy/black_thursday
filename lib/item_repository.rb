@@ -28,7 +28,7 @@ class ItemRepository
 
   def create(attributes)
     attributes[:id] = all.last.id + 1
-    @all << Item.new(attributes)
+    @all << Item.new(attributes, self)
   end
 
   def update(id, attributes)
