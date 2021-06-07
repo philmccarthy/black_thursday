@@ -4,10 +4,11 @@ require_relative 'repositable'
 class ItemRepository
   include Repositable
 
-  attr_reader :all
+  attr_reader :all, :engine
 
-  def initialize(data)
-    @all = data.map { |item_data| Item.new(item_data) }  
+  def initialize(data, engine=nil)
+    @all = data.map { |item_data| Item.new(item_data, repo=self) }
+    @engine = engine
   end
 
   def find_all_with_description(description)

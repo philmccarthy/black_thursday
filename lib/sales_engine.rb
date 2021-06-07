@@ -17,9 +17,9 @@ class SalesEngine
   attr_reader :merchants, :items, :invoices, :analyst
 
   def initialize(data)
-    @items = ItemRepository.new(data[:items])
-    @merchants = MerchantRepository.new(data[:merchants])
-    @invoices = InvoiceRepository.new(data[:invoices])
+    @items = ItemRepository.new(data[:items], self)
+    @merchants = MerchantRepository.new(data[:merchants], self)
+    @invoices = InvoiceRepository.new(data[:invoices], self)
     @analyst = SalesAnalyst.new(self)
   end
 end

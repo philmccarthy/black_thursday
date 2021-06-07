@@ -41,11 +41,8 @@ class Item
     unit_price.to_f
   end
 
-  def engine
-    repo.engine
-  end
-
   def merchant
+    return nil if repo.nil?
     repo.engine.merchants.find_by_id(merchant_id)
   end
 end

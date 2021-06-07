@@ -26,7 +26,7 @@ RSpec.describe SalesAnalyst do
         avg_items_per_merchant = @analyst.average_items_per_merchant
 
         expect(avg_items_per_merchant).to be_a Float
-        expect(avg_items_per_merchant).to eq(0.70)
+        expect(avg_items_per_merchant).to eq(0.64)
       end
     end
 
@@ -35,7 +35,7 @@ RSpec.describe SalesAnalyst do
         actual = @analyst.average_items_per_merchant_standard_deviation
 
         expect(actual).to be_a Float
-        expect(actual).to eq(1.54)
+        expect(actual).to eq(1.60)
       end
     end
 

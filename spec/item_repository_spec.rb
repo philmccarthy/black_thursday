@@ -16,6 +16,7 @@ RSpec.describe ItemRepository do
         expect(@ir.all).to be_an Array
         expect(@ir.all.first).to be_an Item
         expect(@ir.all.size).to eq(7)
+        expect(@ir.engine).to be_nil
       end
     end
 

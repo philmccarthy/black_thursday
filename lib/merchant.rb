@@ -10,8 +10,4 @@ class Merchant
   def name=(name)
     @name = name
   end
-
-  def engine
-    @repo.engine
-  end
 end

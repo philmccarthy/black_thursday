@@ -15,6 +15,7 @@ RSpec.describe InvoiceRepository do
         expect(@inv_repo.all).to be_an Array
         expect(@inv_repo.all.first).to be_an Invoice
         expect(@inv_repo.all.size).to eq(99)
+        expect(@inv_repo.engine).to be_nil
       end
     end
   end

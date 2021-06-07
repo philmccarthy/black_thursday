@@ -5,10 +5,11 @@ require_relative 'repositable'
 class MerchantRepository
   include Repositable
 
-  attr_reader :all
+  attr_reader :all, :engine
 
-  def initialize(data)
-    @all = data.map { |merchant_data| Merchant.new(merchant_data) }
+  def initialize(data, engine=nil)
+    @all = data.map { |merchant_data| Merchant.new(merchant_data, self) }
+    @engine = engine
   end
 
   def find_all_by_name(name)
