@@ -5,7 +5,8 @@ RSpec.describe SalesAnalyst do
   before(:each) do
     files = {
       merchants: './spec/fixtures/merchants_fixture.csv',
-      items: './spec/fixtures/items_fixture.csv'
+      items: './spec/fixtures/items_fixture.csv',
+      invoices: './spec/fixtures/invoices_fixture.csv'
     }
     
     @engine = SalesEngine.from_csv(files)
